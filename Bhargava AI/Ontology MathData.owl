@@ -1,0 +1,170 @@
+@prefix : <http://www.semanticweb.org/user/ontologies/2024/11/Math_Intelligence#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix xml: <http://www.w3.org/XML/1998/namespace> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@base <http://www.semanticweb.org/user/ontologies/2024/11/Math_Intelligence> .
+
+<http://www.semanticweb.org/user/ontologies/2024/11/Math_Intelligence> rdf:type owl:Ontology ;
+                                                                        rdfs:comment "Library Management System"@en .
+
+#################################################################
+#    Annotation properties
+#################################################################
+
+###  http://www.semanticweb.org/user/ontologies/2024/11/Math_Intelligence#hasAuthor
+:hasAuthor rdf:type owl:AnnotationProperty .
+
+
+#################################################################
+#    Object Properties
+#################################################################
+
+###  http://www.semanticweb.org/user/ontologies/2024/11/Math_Intelligence#belongsToCategory
+:belongsToCategory rdf:type owl:ObjectProperty ;
+                   rdfs:domain [ rdf:type owl:Restriction ;
+                                 owl:onProperty :belongsToCategory ;
+                                 owl:someValuesFrom :Book
+                               ] ;
+                   rdfs:range [ rdf:type owl:Restriction ;
+                                owl:onProperty :belongsToCategory ;
+                                owl:someValuesFrom :Category
+                              ] .
+
+
+###  http://www.semanticweb.org/user/ontologies/2024/11/Math_Intelligence#borrowedBy
+:borrowedBy rdf:type owl:ObjectProperty ;
+            rdfs:domain [ rdf:type owl:Restriction ;
+                          owl:onProperty :borrowedBy ;
+                          owl:someValuesFrom :BorrowTransaction
+                        ] ;
+            rdfs:range [ rdf:type owl:Restriction ;
+                         owl:onProperty :borrowedBy ;
+                         owl:someValuesFrom :Member
+                       ] .
+
+
+###  http://www.semanticweb.org/user/ontologies/2024/11/Math_Intelligence#hasAuthor
+:hasAuthor rdf:type owl:ObjectProperty ;
+           rdfs:domain [ rdf:type owl:Restriction ;
+                         owl:onProperty :hasAuthor ;
+                         owl:someValuesFrom :Book
+                       ] ;
+           rdfs:range [ rdf:type owl:Restriction ;
+                        owl:onProperty :hasAuthor ;
+                        owl:someValuesFrom :Author
+                      ] .
+
+
+###  http://www.semanticweb.org/user/ontologies/2024/11/Math_Intelligence#manages
+:manages rdf:type owl:ObjectProperty ;
+         rdfs:domain [ rdf:type owl:Restriction ;
+                       owl:onProperty :manages ;
+                       owl:someValuesFrom :Librarian
+                     ] .
+
+
+#################################################################
+#    Data properties
+#################################################################
+
+###  http://www.semanticweb.org/user/ontologies/2024/11/Math_Intelligence#memberName
+:memberName rdf:type owl:DatatypeProperty ;
+            rdfs:domain :Member ;
+            rdfs:range xsd:string .
+
+
+###  http://www.semanticweb.org/user/ontologies/2024/11/Math_Intelligence#name
+:name rdf:type owl:DatatypeProperty ;
+      rdfs:domain :Author ;
+      rdfs:range xsd:string .
+
+
+###  http://www.semanticweb.org/user/ontologies/2024/11/Math_Intelligence#publishedYear
+:publishedYear rdf:type owl:DatatypeProperty ;
+               rdfs:domain :Book ;
+               rdfs:range xsd:integer .
+
+
+###  http://www.semanticweb.org/user/ontologies/2024/11/Math_Intelligence#title
+:title rdf:type owl:DatatypeProperty ;
+       rdfs:domain :Book ;
+       rdfs:range xsd:string .
+
+
+###  http://www.semanticweb.org/user/ontologies/2024/11/Math_Intelligence#transactionDate
+:transactionDate rdf:type owl:DatatypeProperty ;
+                 rdfs:domain :BorrowTransaction ;
+                 rdfs:range xsd:dateTime .
+
+
+#################################################################
+#    Classes
+#################################################################
+
+###  http://www.semanticweb.org/user/ontologies/2024/11/Math_Intelligence#Author
+:Author rdf:type owl:Class ;
+        rdfs:comment "Represents authors who write books."@en .
+
+
+###  http://www.semanticweb.org/user/ontologies/2024/11/Math_Intelligence#Book
+:Book rdf:type owl:Class ;
+      rdfs:comment "Represents books available in the library."@en .
+
+
+###  http://www.semanticweb.org/user/ontologies/2024/11/Math_Intelligence#BorrowTransaction
+:BorrowTransaction rdf:type owl:Class ;
+                   rdfs:comment "Represents the act of borrowing books."@en .
+
+
+###  http://www.semanticweb.org/user/ontologies/2024/11/Math_Intelligence#Category
+:Category rdf:type owl:Class ;
+          rdfs:comment "Represents genres or types of books, e.g., Fiction, Non-Fiction, Science, etc."@en .
+
+
+###  http://www.semanticweb.org/user/ontologies/2024/11/Math_Intelligence#Librarian
+:Librarian rdf:type owl:Class ;
+           rdfs:comment "Represents the staff responsible for managing the library."@en .
+
+
+###  http://www.semanticweb.org/user/ontologies/2024/11/Math_Intelligence#Member
+:Member rdf:type owl:Class ;
+        rdfs:comment "Represents members who can borrow books."@en .
+
+
+#################################################################
+#    Individuals
+#################################################################
+
+###  http://www.semanticweb.org/user/ontologies/2024/11/Math_Intelligence#Author1
+:Author1 rdf:type owl:NamedIndividual ,
+                  :Author ;
+         :name "John Doe"@en .
+
+
+###  http://www.semanticweb.org/user/ontologies/2024/11/Math_Intelligence#Book1
+:Book1 rdf:type owl:NamedIndividual ;
+       :hasAuthor :Author1 ;
+       :publishedYear "publishedYear"@en ;
+       :title "Introduction to AI"@en .
+
+
+###  http://www.semanticweb.org/user/ontologies/2024/11/Math_Intelligence#Book2
+:Book2 rdf:type owl:NamedIndividual ;
+       :publishedYear "2019"@en ;
+       :title "Python for Data Science"@en .
+
+
+###  http://www.semanticweb.org/user/ontologies/2024/11/Math_Intelligence#Member1
+:Member1 rdf:type owl:NamedIndividual ;
+         :name "Alice"@en .
+
+
+###  http://www.semanticweb.org/user/ontologies/2024/11/Math_Intelligence#Transaction1
+:Transaction1 rdf:type owl:NamedIndividual ;
+              :borrowedBy :Member1 ;
+              :transactionDate "2023-12-01"@en .
+
+
+###  Generated by the OWL API (version 4.5.9.2019-02-01T07:24:44Z) https://github.com/owlcs/owlapi
